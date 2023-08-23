@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'src/terraform/**'
-      - '.github/workflow/**'
+      - '.github/workflows/**'
 
 env:
   WORKING_DIRECTORY: "src/terraform"
