@@ -32,10 +32,10 @@ resource "azurerm_linux_function_app" "foo" {
   site_config {
     application_stack {
       dotnet_version = "6.0"
-      cors {
-        allowed_origins     = ["https://portal.azure.com"]
-        support_credentials = true
-      }
+    }
+    cors {
+      allowed_origins     = ["https://portal.azure.com"]
+      support_credentials = true
     }
   }
 
