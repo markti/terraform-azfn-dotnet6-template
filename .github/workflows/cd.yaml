@@ -56,6 +56,9 @@ jobs:
 
   terraform:
     runs-on: ubuntu-latest
+    outputs:
+      resource_group_name: ${{ steps.apply.outputs.resource_group_name }}
+      function_name: ${{ steps.apply.outputs.function_name }}
     steps:
     - uses: actions/checkout@v3
 
@@ -65,7 +68,8 @@ jobs:
         terraform_version: 1.5.5
         terraform_wrapper: false
 
-    - name: Terraform Apply
+    - id: apply
+      name: Terraform Apply
       env:
         ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
         ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
@@ -87,6 +91,36 @@ jobs:
 
         terraform apply -auto-approve
 
+        resource_group_name=$(terraform output -raw resource_group_name)
+        echo $resource_group_name
+        echo "resource_group_name=$resource_group_name" >> "$GITHUB_OUTPUT"
+
+        function_name=$(terraform output -raw function_name)
+        echo $function_name
+        echo "function_name=$function_name" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: [terraform, build]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: function-deployment
+
+    - name: Deploy
+      env:
+        ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
+        ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        RESOURCE_GROUP_NAME: ${{ needs.terraform.outputs.resource_group_name }}
+        FUNCTION_NAME: ${{ needs.terraform.outputs.function_name }}
+      run: |
+        az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID --output none
+        az account set -s $ARM_SUBSCRIPTION_ID --output none
+        az functionapp deployment source config-zip -g $RESOURCE_GROUP_NAME -n $FUNCTION_NAME --src ./deployment.zip
 
 
 
