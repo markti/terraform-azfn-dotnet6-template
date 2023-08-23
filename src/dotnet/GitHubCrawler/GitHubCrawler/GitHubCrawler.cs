@@ -14,7 +14,7 @@ namespace GitHubCrawler
     {
         [FunctionName("GitHubCrawler")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.None, "get", Route = "foo")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "foo")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
