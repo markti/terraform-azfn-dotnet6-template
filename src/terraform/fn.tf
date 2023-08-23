@@ -30,6 +30,9 @@ resource "azurerm_linux_function_app" "foo" {
   service_plan_id            = azurerm_service_plan.main.id
 
   site_config {
+    application_insights_key               = azurerm_application_insights.main.instrumentation_key
+    application_insights_connection_string = azurerm_application_insights.main.connection_string
+
     application_stack {
       dotnet_version = "6.0"
     }
@@ -40,8 +43,7 @@ resource "azurerm_linux_function_app" "foo" {
   }
 
   app_settings = {
-    "WEBSITE_RUN_FROM_PACKAGE"       = 1
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.main.instrumentation_key
+    "WEBSITE_RUN_FROM_PACKAGE" = 1
   }
 
   identity {
