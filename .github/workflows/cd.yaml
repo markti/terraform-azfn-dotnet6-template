@@ -37,7 +37,7 @@ jobs:
         TF_VAR_application_name: ${{ env.APPLICATION_NAME }}
         TF_VAR_environment_name: ${{ env.ENVIRONMENT_NAME }}
         TF_BACKEND_KEY: ${{ env.APPLICATION_NAME }}-${{ env.ENVIRONMENT_NAME }}
-      working-directory: ${ env.WORKING_DIRECTORY }
+      working-directory: ${{ env.WORKING_DIRECTORY }}
       run: |
         terraform init \
           -backend-config="resource_group_name=$BACKEND_RESOURCE_GROUP_NAME" \
