@@ -4,19 +4,30 @@ on:
   push:
   pull_request:
     branches: [ main ]
-    
+
 env:
   DOTNET_VERSION: '6.0.401' # The .NET SDK version to use
+  WORKING_DIRECTORY: ./src/dotnet/GitHubCrawler
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
       - name: Install dependencies
         run: dotnet restore
-        working-directory: ./src/dotnet/GitHubCrawler
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+             
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal --filter Category=Unit
+        working-directory: ${{ env.WORKING_DIRECTORY }}
