@@ -5,6 +5,8 @@ VisualStudioVersion = 25.0.1706.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubCrawler", "GitHubCrawler\GitHubCrawler.csproj", "{D3C26B8E-F6EB-4A87-A4F1-4A0B6670FCBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubCrawler.UnitTests", "GitHubCrawler.UnitTests\GitHubCrawler.UnitTests.csproj", "{77190DE0-9034-4897-88B3-EEB65FB7EE81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D3C26B8E-F6EB-4A87-A4F1-4A0B6670FCBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3C26B8E-F6EB-4A87-A4F1-4A0B6670FCBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3C26B8E-F6EB-4A87-A4F1-4A0B6670FCBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77190DE0-9034-4897-88B3-EEB65FB7EE81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77190DE0-9034-4897-88B3-EEB65FB7EE81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77190DE0-9034-4897-88B3-EEB65FB7EE81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77190DE0-9034-4897-88B3-EEB65FB7EE81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
