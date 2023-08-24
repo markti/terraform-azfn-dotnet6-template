@@ -7,17 +7,29 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using GitHubCrawler.Services.Interfaces;
 
 namespace GitHubCrawler
 {
-    public static class GitHubCrawler
+    public class GitHubCrawler
     {
+        private readonly IBulkRequestProcessor _bulkRequestProcessor;
+
+        public GitHubCrawler(IBulkRequestProcessor bulkRequestProcessor)
+        {
+            _bulkRequestProcessor = bulkRequestProcessor;
+        }
+
         [FunctionName("GitHubCrawler")]
-        public static async Task<IActionResult> Run(
+        public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "foo")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
+
+            var myNumber = await _bulkRequestProcessor.DoSomethingAsync();
+
+            log.LogInformation($"Here's my number: {myNumber}");
 
             string name = req.Query["name"];
 
@@ -33,4 +45,3 @@ namespace GitHubCrawler
         }
     }
 }
-

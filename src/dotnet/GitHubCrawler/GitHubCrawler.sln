@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubCrawler", "GitHubCraw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubCrawler.UnitTests", "GitHubCrawler.UnitTests\GitHubCrawler.UnitTests.csproj", "{77190DE0-9034-4897-88B3-EEB65FB7EE81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubCrawler.Services", "GitHubCrawler.Services\GitHubCrawler.Services.csproj", "{228FB36B-9A84-4F07-9266-6FB5570EB2D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{77190DE0-9034-4897-88B3-EEB65FB7EE81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77190DE0-9034-4897-88B3-EEB65FB7EE81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77190DE0-9034-4897-88B3-EEB65FB7EE81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{228FB36B-9A84-4F07-9266-6FB5570EB2D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{228FB36B-9A84-4F07-9266-6FB5570EB2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{228FB36B-9A84-4F07-9266-6FB5570EB2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{228FB36B-9A84-4F07-9266-6FB5570EB2D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
