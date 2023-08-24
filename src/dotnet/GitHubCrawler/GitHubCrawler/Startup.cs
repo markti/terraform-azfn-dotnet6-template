@@ -16,7 +16,7 @@ namespace GitHubCrawler
 
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddSingleton<IBulkRequestProcessor, BulkRequestProcessor>();
+            builder.Services.AddSingleton<IBulkRequestProcessor, AltImplementation>();
         }
     }
 }
