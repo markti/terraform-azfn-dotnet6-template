@@ -7,7 +7,7 @@
           "excludedTypes": "Request"
         },
         "enableLiveMetricsFilters": true
-      }
+      },
       "logLevel": {
         "GitHubCrawler.GitHubCrawler": "Information"
       }
