@@ -13,24 +13,23 @@ namespace GitHubCrawler
 {
     public class GitHubCrawler
     {
-        private readonly ILogger<GitHubCrawler> _logger;
         private readonly IBulkRequestProcessor _bulkRequestProcessor;
 
-        public GitHubCrawler(ILogger<GitHubCrawler> logger, IBulkRequestProcessor bulkRequestProcessor)
+        public GitHubCrawler(IBulkRequestProcessor bulkRequestProcessor)
         {
-            _logger = logger;
             _bulkRequestProcessor = bulkRequestProcessor;
         }
 
         [FunctionName("GitHubCrawler")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "foo")] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "foo")] HttpRequest req,
+            ILogger log)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            log.LogInformation("C# HTTP trigger function processed a request.");
 
             var myNumber = await _bulkRequestProcessor.DoSomethingAsync();
 
-            _logger.LogInformation($"Here's my number: {myNumber}");
+            log.LogInformation($"Here's my number: {myNumber}");
 
             string name = req.Query["name"];
 
