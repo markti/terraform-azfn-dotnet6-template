@@ -9,7 +9,7 @@
         "enableLiveMetricsFilters": true
       },
       "logLevel": {
-        "GitHubCrawler.GitHubCrawler": "Information"
+        "GitHubCrawler.*": "Information"
       }
     }
 }
