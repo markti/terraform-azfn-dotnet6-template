@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using GitHubCrawler.Services.Interfaces;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
+using System.Collections.Generic;
 
 namespace GitHubCrawler
 {
@@ -36,7 +37,10 @@ namespace GitHubCrawler
 
             _logger.LogInformation($"Here's my number: {myNumber}");
 
-            _telemetryClient.TrackEvent("Azure Function Event");
+            var eventAttributes = new Dictionary<string, string>();
+            eventAttributes.Add("Foo", "5");
+            eventAttributes.Add("Bar", "41");
+            _telemetryClient.TrackEvent("Azure Function Event", eventAttributes);
 
             string name = req.Query["name"];
 
