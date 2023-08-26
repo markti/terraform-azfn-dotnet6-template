@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using GitHubCrawler.Services.Interfaces;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
 
 namespace GitHubCrawler
 {
@@ -15,11 +17,13 @@ namespace GitHubCrawler
     {
         private readonly IBulkRequestProcessor _bulkRequestProcessor;
         private readonly ILogger<GitHubCrawler> _logger;
+        private readonly TelemetryClient _telemetryClient;
 
-        public GitHubCrawler(ILogger<GitHubCrawler> logger, IBulkRequestProcessor bulkRequestProcessor)
+        public GitHubCrawler(ILogger<GitHubCrawler> logger, TelemetryConfiguration telemetryConfiguration, IBulkRequestProcessor bulkRequestProcessor)
         {
             _logger = logger;
             _bulkRequestProcessor = bulkRequestProcessor;
+            _telemetryClient = new TelemetryClient(telemetryConfiguration);
         }
 
         [FunctionName("GitHubCrawler")]
@@ -31,6 +35,8 @@ namespace GitHubCrawler
             var myNumber = await _bulkRequestProcessor.DoSomethingAsync();
 
             _logger.LogInformation($"Here's my number: {myNumber}");
+
+            _telemetryClient.TrackEvent("Azure Function Event");
 
             string name = req.Query["name"];
 
